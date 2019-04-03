@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using UnityEditor;
 using UnityEngine;
 
 
@@ -14,11 +15,11 @@ public class UIController : MonoBehaviour {
 
     public void ClickImportData()
     {
-       
-           
-        
+        string filePath = EditorUtility.OpenFilePanel("Find File", Application.dataPath, "*.*");
 
- 
+
+
+
     }
 
     private void OnGUI()
