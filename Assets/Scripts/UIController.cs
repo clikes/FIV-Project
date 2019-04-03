@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UIController : MonoBehaviour {
-
+    //List<int> test;
 	// Use this for initialization
 	void Start () {
-		
-	}
+
+    }
 
     public void ClickImportData()
     {
