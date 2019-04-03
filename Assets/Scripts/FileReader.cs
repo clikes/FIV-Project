@@ -27,6 +27,7 @@ public class FileReader :MonoBehaviour {
         int columnCount = 0;
         //first line is the name of column
         bool IsFirst = true;
+        bool IsFirstData = true;
 
         //read csv line by line
         while ((strLine = sr.ReadLine()) != null)
@@ -40,12 +41,33 @@ public class FileReader :MonoBehaviour {
                 for (int i = 0; i < columnCount; i++)
                 {
                     DataColumn dc = new DataColumn(aryLine[i]);
-                    dc.DataType = typeof(float);
+                    //dc.DataType = typeof(double);
                     dt.Columns.Add(dc);
+                    dt.Columns[0].DataType = typeof(int);
                 }
             }
             else
             {
+
+                if (IsFirstData)
+                {
+                    IsFirstData = false;
+                    for (int j = 0; j < columnCount; j++)
+                    {
+                        if (IsInt(aryLine[j]))
+                        {
+                            dt.Columns[j].DataType = typeof(int);
+                        }
+                        else if(IsNumeric(aryLine[j]))
+                        {
+                            dt.Columns[j].DataType = typeof(float);
+                        }
+                        else
+                        {
+                            dt.Columns[j].DataType = typeof(string);
+                        }
+                    }
+                }
                 DataRow dr = dt.NewRow();
                 for (int j = 0; j < columnCount; j++)
                 {
@@ -54,6 +76,7 @@ public class FileReader :MonoBehaviour {
                 dt.Rows.Add(dr);
             }
         }
+
 
 
         //foreach (DataRow datarow in dt.Rows)
@@ -72,14 +95,25 @@ public class FileReader :MonoBehaviour {
         return dt;
     }
 
+    //public static DataTable ChangeColumnType(DataTable oldtb, Type toType, string columnName)
+    //{
+    //    DataTable newtb = oldtb.Clone();
+    //    newtb.Columns[columnName].DataType = toType;
+    //    foreach (var item in collection)
+    //    {
+    //        Convert.
+    //    }
+    //    return null;
+    //}
+
     public static bool IsNumeric(string value)
     {
-        return Regex.IsMatch(value, @"^[+-]?/d*[.]?/d*$");
+        return Regex.IsMatch(value, @"^[+-]?\d*[.]?\d*$");
     }
 
     public static bool IsInt(string value)
     {
-        return Regex.IsMatch(value, @"^[+-]?/d*$");
+        return Regex.IsMatch(value, @"^[+-]?\d*$");
     }
 
     public static bool IsBool(string value)
@@ -91,6 +125,7 @@ public class FileReader :MonoBehaviour {
     {
         //int test = 1;
         DataTable dt = FileReader.CSV2DataTable("/Users/like/Documents/git/FIV Project/heart.csv");
-        Debug.Log(dt.Rows[0][3]));
+        Debug.Log(dt.Rows[0][3]);
+        //Debug.Log(IsNumeric("22.2"));
     }
 }
