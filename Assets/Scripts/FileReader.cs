@@ -48,7 +48,7 @@ public class FileReader :MonoBehaviour {
             }
             else
             {
-
+                ///Determine data type  
                 if (IsFirstData)
                 {
                     IsFirstData = false;
