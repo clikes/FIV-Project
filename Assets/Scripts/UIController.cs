@@ -9,6 +9,9 @@ using static UnityEngine.UI.Dropdown;
 
 public class UIController : MonoBehaviour {
 
+    /// <summary>
+    /// Reference to select panel's dropdowns
+    /// </summary>
     public Dropdown[] Selectdps;
 
     public DataExtractor temp;
@@ -20,27 +23,51 @@ public class UIController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Clicks the import data button event.
+    /// </summary>
     public void ClickImportData()
     {
         string filePath = EditorUtility.OpenFilePanel("Import File", "", "csv");
+        if (filePath.Length == 0) return;
         FileReader.ReadFile(filePath);
         temp = FileReader.Datas[FileReader.Datas.Count-1];
         UpdateSelectPanel();
     }
 
-    void UpdateSelectPanel()
+    /// <summary>
+    /// Updates the select panel, each value change and initialize,
+    /// when value change the list should change.
+    /// </summary>
+    public void UpdateSelectPanel()
     {
-        List<OptionData> options = new List<OptionData>();
-        options.Add(new OptionData("-"));
-        foreach (var item in temp.columnName)
+        List<OptionData> options = new List<OptionData>
         {
-            options.Add(new OptionData(item));
-        }
-        foreach (var item in Selectdps)
+            new OptionData("  -  ")//default null value
+        };
+        for (int i = 0; i < temp.Length; i++)
         {
-            item.AddOptions(options);
+            options.Add(new OptionData(temp.columnName[i] + " " + temp.types[i].Name));
         }
-        //Selectdp1.AddOptions(options);
+        //List<OptionData>[] optionForEachDropDown = new List<OptionData>[Selectdps.Length];
+
+        ///Selected options should not exist in other's options, 
+        ///remove the selected options here
+        for (int i = 0; i < Selectdps.Length; i++)
+        {
+            List<OptionData> buffer = new List<OptionData>();
+            options.ForEach(opt => buffer.Add(opt));
+            foreach (var dropdown in Selectdps)
+            {
+                if (dropdown.Equals(Selectdps[i])) continue;
+                if (dropdown.value == 0) continue;
+                buffer.Remove(dropdown.options[dropdown.value]);
+            }
+
+            ///clear before adding
+            Selectdps[i].ClearOptions();
+            Selectdps[i].AddOptions(buffer);
+        }
     }
 
 

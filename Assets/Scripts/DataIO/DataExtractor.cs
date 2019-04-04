@@ -13,6 +13,8 @@ namespace DataIO
 
         private DataTable dataTable;
 
+        public int Length { get; private set; }
+
 
         public DataExtractor(DataTable dataTable)
         {
@@ -26,6 +28,8 @@ namespace DataIO
                 columnName.Add(col.ColumnName);
                 types.Add(col.DataType);
             }
+
+            Length = types.Count;
         }
 
         public List<int> GetIntColumn(string columnName)
