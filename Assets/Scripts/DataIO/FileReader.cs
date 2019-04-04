@@ -134,10 +134,18 @@ namespace DataIO
 
         private void Start()
         {
-            //int test = 1;
-            DataTable dt = FileReader.CSV2DataTable("/Users/like/Documents/git/FIV Project/heart.csv");
-            Debug.Log(dt.Rows[0][3]);
-            //Debug.Log(IsNumeric("22.2"));
+            List<string> strs = new List<string>();
+            List<string> strs2 = new List<string>();
+            string test1 = "2222";
+            string test2 = "2222";
+            string test3 = "2222";
+            string test4 = "2222";
+            strs.Add(test1);
+            strs.Add(test2);
+            strs.Add(test3);
+            strs.Add(test4);
+            strs2.Add(test1);
+            //Debug.Log(strs.IndexOf(test3));
         }
     }
 }

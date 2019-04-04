@@ -28,11 +28,13 @@ public class UIController : MonoBehaviour {
     /// </summary>
     public void ClickImportData()
     {
-        string filePath = EditorUtility.OpenFilePanel("Import File", "", "csv");
+        string filePath = EditorUtility.OpenFilePanel("Import File", "", "");
         if (filePath.Length == 0) return;
         FileReader.ReadFile(filePath);
         temp = FileReader.Datas[FileReader.Datas.Count-1];
         UpdateSelectPanel();
+        GameObject.Find("DataVisualizor").GetComponent<DataVisualizor>().LoadData("age", "sex", "trestbps", temp);
+
     }
 
     /// <summary>
@@ -45,7 +47,7 @@ public class UIController : MonoBehaviour {
         {
             new OptionData("  -  ")//default null value
         };
-        for (int i = 0; i < temp.Length; i++)
+        for (int i = 0; i < temp.columnLength; i++)
         {
             options.Add(new OptionData(temp.columnName[i] + " " + temp.types[i].Name));
         }
