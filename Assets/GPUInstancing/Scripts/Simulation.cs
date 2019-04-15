@@ -262,7 +262,7 @@ public class Simulation : MonoBehaviour
         handle.Complete();
 
         job.particles.CopyTo(particles);
-        particleSystem.SetParticles(particles, particles.Length);
+        GetComponent<ParticleSystem>().SetParticles(particles, particles.Length);
           
         
         if (Input.GetKeyDown(KeyCode.Space))
@@ -333,19 +333,19 @@ public struct PlanetData
     }
 }
 
-public struct PlanetJob : IJobParallelForTransform
-{
-    public NativeArray<PlanetData> planets;
-    public PlanetData sun;
+//public struct PlanetJob : IJobParallelForTransform
+//{
+//    public NativeArray<PlanetData> planets;
+//    public PlanetData sun;
 
-    public float dt, G;
-    public void Execute(int index, TransformAccess transform)
-    {
-        var d = planets[index];
-        transform.position = d.Process(sun, G, dt);
-        planets[index] = d;
-    }
-}
+//    public float dt, G;
+//    public void Execute(int index, TransformAccess transform)
+//    {
+//        var d = planets[index];
+//        transform.position = d.Process(sun, G, dt);
+//        planets[index] = d;
+//    }
+//}
 
 public struct PlanetParticleJob : IJobParallelFor
 {

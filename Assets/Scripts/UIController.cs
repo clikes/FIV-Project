@@ -33,7 +33,7 @@ public class UIController : MonoBehaviour {
         FileReader.ReadFile(filePath);
         temp = FileReader.Datas[FileReader.Datas.Count-1];
         UpdateSelectPanel();
-        GameObject.Find("DataVisualizor").GetComponent<DataVisualizor>().LoadData("age", "sex", "trestbps", temp);
+        GameObject.Find("DataVisualizor").GetComponent<DataVisualizorG>().LoadData("age", "sex", "trestbps", temp);
 
     }
 

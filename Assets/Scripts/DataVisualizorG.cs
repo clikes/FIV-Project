@@ -68,42 +68,51 @@ public class DataVisualizorG : MonoBehaviour
             dataPositions[i] = new Vector3(xvalues[i], yvalues[i], zvalues[i]);
         }
 
-        foreach (var vector3 in dataPositions)
-        {
-            //dataobjects.Add(Instantiate(dataPoint, vector3, dataPoint.transform.rotation));
-        }
+        //foreach (var vector3 in dataPositions)
+        //{
+        //    //dataobjects.Add(Instantiate(dataPoint, vector3, dataPoint.transform.rotation));
+        //}
         ParticleProcess();
     }
 
     public void ParticleProcess()
     {
-        points.Dispose();
-        particlesNative.Dispose();
+        if (points.Length != 0)
+        {
+            points.Dispose();
+            particlesNative.Dispose();
+        }
+        
 
         particles = new ParticleSystem.Particle[dataPositions.Length];
-        for (int i = 0; i < particles.Length; i++)
-        {
-            var part = particles[i];
-            part.rotation3D = new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
-            particles[i] = part;
-        }
 
-        particlesNative = new NativeArray<ParticleSystem.Particle>(particles, Allocator.Persistent);
         points = new NativeArray<PointData>(dataPositions.Length, Allocator.Persistent);
         var pointsData = new PointData[dataPositions.Length];
         for (int i = 0; i < pointsData.Length; i++)
         {
             var data = new PointData();
             data.position = dataPositions[i];
+            data.size = 1;
             pointsData[i] = data;
         }
+
+        for (int i = 0; i < particles.Length; i++)
+        {
+            var part = particles[i];
+            part.rotation3D = new Vector3(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
+            part.position = dataPositions[i];
+            particles[i] = part;
+        }
+
+        particlesNative = new NativeArray<ParticleSystem.Particle>(particles, Allocator.Persistent);
+
         points.CopyFrom(pointsData);
 
 
     }
     void Start()
     {
-
+        ps = GetComponent<ParticleSystem>();
     }
 
     private void OnApplicationQuit()
@@ -123,7 +132,7 @@ public class DataVisualizorG : MonoBehaviour
         if (dataPositions != null)
         {
             var job = new PointJobParticleJob();
-            job.dataPositions = dataPositions;
+            //job.dataPositions = dataPositions;
             job.particles = particlesNative;
             job.points = points;
 
@@ -132,6 +141,8 @@ public class DataVisualizorG : MonoBehaviour
 
             job.particles.CopyTo(particles);
             ps.SetParticles(particles, particles.Length);
+            Debug.Log(ps.isPlaying);
+            //ps.Play();
         }
     }
 }
@@ -172,8 +183,8 @@ public struct PointJobParticleJob : IJobParallelFor
 {
     public NativeArray<ParticleSystem.Particle> particles;
     public NativeArray<PointData> points;
-    public Vector3[] dataPositions;
-    public float[] size;
+    //public Vector3[] dataPositions;
+    //public float[] size;
     //[ReadOnly] public NativeArray<PointData> suns;
 
     public float dt, G, colorRange;
@@ -183,19 +194,19 @@ public struct PointJobParticleJob : IJobParallelFor
     {
         var part = particles[index];
         var point = points[index];
-        var dl = dataPositions.Length;
-        for (int i = 0; i < dl; i++)
-        {
-            if (size == null)
-            {
-                point.Process(1, dataPositions[i]);
-            }
-            else
-            {
-                point.Process(size[i], dataPositions[i]);
-            }
+        //var dl = dataPositions.Length;
+        //for (int i = 0; i < dl; i++)
+        //{
+        //    if (size == null)
+        //    {
+        //        point.Process(1, dataPositions[i]);
+        //    }
+        //    else
+        //    {
+        //        point.Process(size[i], dataPositions[i]);
+        //    }
            
-        }
+        //}
        // planet.position += planet.velocity * dt;
         part.position = point.position;
         part.velocity = Vector3.zero;
@@ -203,6 +214,7 @@ public struct PointJobParticleJob : IJobParallelFor
         part.startSize = point.size;
         //part.startColor = Color.Lerp(colorA, colorB, planet.velocity.sqrMagnitude / (colorRange * colorRange));
         //part.startColor = colorA;
+        part.startColor = Color.red;
         //part.rotation3D = part.rotation3D + (new Vector3(0, dt, 0) * 15);
         points[index] = point;
         particles[index] = part;
