@@ -64,6 +64,7 @@ public class DataVisualizor : MonoBehaviour {
                 }
             }
         }
+
         for (int i = 0; i < data.dataLength; i++)
         {
             dataPositions[i] = new Vector3(xvalues[i], yvalues[i], zvalues[i]);
