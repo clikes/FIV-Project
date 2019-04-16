@@ -93,9 +93,9 @@ public class UIController : MonoBehaviour {
         {
             new OptionData(defaultOpt)//default null value
         };
-        for (int i = 0; i < temp.columnLength; i++)
+        for (int i = 0; i < temp.columnLength; i++)//+ " " + temp.types[i].Name
         {
-            options.Add(new OptionData(temp.columnName[i] + " " + temp.types[i].Name));
+            options.Add(new OptionData(temp.columnName[i]));
         }
         //List<OptionData>[] optionForEachDropDown = new List<OptionData>[Selectdps.Length];
 
