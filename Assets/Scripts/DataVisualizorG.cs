@@ -232,27 +232,11 @@ public struct PointJobParticleJob : IJobParallelFor
     //public float[] size;
     //[ReadOnly] public NativeArray<PointData> suns;
 
-    public float dt, G, colorRange;
-    public Color colorA, colorB;
 
     public void Execute(int index)
     {
         var part = particles[index];
         var point = points[index];
-        //var dl = dataPositions.Length;
-        //for (int i = 0; i < dl; i++)
-        //{
-        //    if (size == null)
-        //    {
-        //        point.Process(1, dataPositions[i]);
-        //    }
-        //    else
-        //    {
-        //        point.Process(size[i], dataPositions[i]);
-        //    }
-           
-        //}
-       // planet.position += planet.velocity * dt;
         part.position = point.position;
         part.velocity = Vector3.zero;
         part.remainingLifetime = 5;

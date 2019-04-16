@@ -35,7 +35,7 @@ public class UIController : MonoBehaviour {
         FileReader.ReadFile(filePath);
         temp = FileReader.Datas[FileReader.Datas.Count-1];
         UpdateSelectPanel();
-        //GameObject.Find("DataVisualizor").GetComponent<DataVisualizorG>().LoadData("age", "sex", "trestbps", temp);
+        GameObject.Find("DataVisualizor").GetComponent<DataVisualizor>().LoadData("age", "chol", "trestbps","cp", "",  temp);
 
     }
 
@@ -48,10 +48,10 @@ public class UIController : MonoBehaviour {
     /// <param name="sizename">Sizename.</param>
     /// <param name="colorname">Colorname.</param>
     /// <param name="data">Data.</param>
-    public void OnClickSelectData(string xcolname, string ycolname, string zcolname, string sizename, string colorname, DataExtractor data)
+    public void OnClickSelectData(string xcolname, string ycolname, string zcolname, string sizename, string colorname)
     {
         //TODO check the data
-        dv.LoadData(xcolname, ycolname, zcolname, sizename, colorname, data);
+        dv.LoadData(xcolname, ycolname, zcolname, sizename, colorname, temp);
     }
 
     /// <summary>
