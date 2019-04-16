@@ -173,7 +173,7 @@ public class DataVisualizor : MonoBehaviour {
         //{
         //    dataobjects.Add(Instantiate(dataPoint, new Vector3(Random.Range(1, 100), Random.Range(1, 100), Random.Range(1, 100)), dataPoint.transform.rotation));
         //}
-        tester();
+        //tester();
     }
 
     // Update is called once per frame
