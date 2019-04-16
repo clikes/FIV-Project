@@ -16,9 +16,22 @@ public class UIController : MonoBehaviour {
 
     public DataExtractor temp;
 
-    public DataVisualizorG dv;
+    public DataVisualizor dv;
+
+    public GameObject SelectPanel;
+
+    public GameObject MainPanel;
+
+    public Text[] selectPanelTexts;
+
+    string xcolname, ycolname, zcolname, sizename, colorname;
+
+    string[] colnames = new string[5];
+
+    string defaultOpt = "  -  ";
 
     void Start () {
+        dv = GameObject.Find("DataVisualizor").GetComponent<DataVisualizor>();
         foreach (var dp in Selectdps)
         {
             dp.ClearOptions();
@@ -35,7 +48,10 @@ public class UIController : MonoBehaviour {
         FileReader.ReadFile(filePath);
         temp = FileReader.Datas[FileReader.Datas.Count-1];
         UpdateSelectPanel();
-        GameObject.Find("DataVisualizor").GetComponent<DataVisualizor>().LoadData("age", "chol", "trestbps","cp", "",  temp);
+        //GameObject.Find("DataVisualizor").GetComponent<DataVisualizor>().LoadData("thalach", "chol", "trestbps", "age", "cp",  temp);
+        MainPanel.SetActive(false);
+        UpdateSelectPanel();
+        SelectPanel.SetActive(true);
 
     }
 
@@ -48,10 +64,23 @@ public class UIController : MonoBehaviour {
     /// <param name="sizename">Sizename.</param>
     /// <param name="colorname">Colorname.</param>
     /// <param name="data">Data.</param>
-    public void OnClickSelectData(string xcolname, string ycolname, string zcolname, string sizename, string colorname)
+    public void OnClickSelectData()
     {
         //TODO check the data
-        dv.LoadData(xcolname, ycolname, zcolname, sizename, colorname, temp);
+        for (int i = 0; i < Selectdps.Length; i++)
+        {
+            Dropdown dp = Selectdps[i];
+            if (dp.options[dp.value].text == defaultOpt)
+            {
+                colnames[i] = "";
+            }
+            else
+            {
+                colnames[i] = dp.options[dp.value].text;
+            }
+        }
+        dv.LoadData(colnames[0], colnames[1], colnames[2], colnames[3], colnames[4], temp);
+        SelectPanel.SetActive(false);
     }
 
     /// <summary>
@@ -62,7 +91,7 @@ public class UIController : MonoBehaviour {
     {
         List<OptionData> options = new List<OptionData>
         {
-            new OptionData("  -  ")//default null value
+            new OptionData(defaultOpt)//default null value
         };
         for (int i = 0; i < temp.columnLength; i++)
         {

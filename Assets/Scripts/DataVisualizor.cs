@@ -22,6 +22,8 @@ public class DataVisualizor : MonoBehaviour {
 
     Color[] dataColor;
 
+    float sizeMaxScale = 10;
+
     float[] xvalues, yvalues, zvalues, sizevalues, colorvalues;
     string[] colnames;
 
@@ -92,6 +94,24 @@ public class DataVisualizor : MonoBehaviour {
         dataPositions = new Vector3[dataPositions.Length];
         dataColor = new Color[dataPositions.Length];
         dataobjects.Clear();
+        float maxSize = float.MinValue;
+        float maxColor = float.MinValue;
+
+        foreach (var val in sizevalues)
+        {
+            if (maxSize < val)
+            {
+                maxSize = val;
+            }
+        }
+
+        foreach (var val in colorvalues)
+        {
+            if (maxColor < val)
+            {
+                maxColor = val;
+            }
+        }
 
         for (int i = 0; i < dataPositions.Length; i++)
         {
@@ -107,12 +127,13 @@ public class DataVisualizor : MonoBehaviour {
             }
             else
             {
-                dataobjects[i].GetComponent<Renderer>().material.color = new Color(1, 0, 50 / colorvalues[i]);
+                dataobjects[i].GetComponent<Renderer>().material.color = new Color(1 - colorvalues[i] / maxColor, 1 - colorvalues[i] / maxColor,  1 - colorvalues[i] / maxColor);
             }
 
             if (colnames[3].Length != 0)
             {
-                dataobjects[i].transform.localScale = new Vector3(sizevalues[i], sizevalues[i], sizevalues[i]);
+                float scale = sizevalues[i] / maxSize * sizeMaxScale;
+                dataobjects[i].transform.localScale = new Vector3(scale, scale, scale);
             }
         }
 
