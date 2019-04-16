@@ -16,6 +16,8 @@ public class UIController : MonoBehaviour {
 
     public DataExtractor temp;
 
+    public DataVisualizorG dv;
+
     void Start () {
         foreach (var dp in Selectdps)
         {
@@ -33,8 +35,23 @@ public class UIController : MonoBehaviour {
         FileReader.ReadFile(filePath);
         temp = FileReader.Datas[FileReader.Datas.Count-1];
         UpdateSelectPanel();
-        GameObject.Find("DataVisualizor").GetComponent<DataVisualizor>().LoadData("age", "sex", "trestbps", temp);
+        GameObject.Find("DataVisualizor").GetComponent<DataVisualizor>().LoadData("age", "chol", "trestbps","cp", "",  temp);
 
+    }
+
+    /// <summary>
+    /// Check if the data can be visualize 
+    /// </summary>
+    /// <param name="xcolname">Xcolname.</param>
+    /// <param name="ycolname">Ycolname.</param>
+    /// <param name="zcolname">Zcolname.</param>
+    /// <param name="sizename">Sizename.</param>
+    /// <param name="colorname">Colorname.</param>
+    /// <param name="data">Data.</param>
+    public void OnClickSelectData(string xcolname, string ycolname, string zcolname, string sizename, string colorname)
+    {
+        //TODO check the data
+        dv.LoadData(xcolname, ycolname, zcolname, sizename, colorname, temp);
     }
 
     /// <summary>
