@@ -17,49 +17,53 @@ public class DataVisualizorG : MonoBehaviour
     ParticleSystem.Particle[] particles;
 
     Vector3[] dataPositions;
-   
-    
-    
+
+    float[] xvalues, yvalues, zvalues, sizevalues, colorvalues;
+    /// <summary>
+    /// Loads the data, adapt to the empty string if user do not needs the axis; 
+    /// </summary>
+    /// <param name="xcolname">Xcolname.</param>
+    /// <param name="ycolname">Ycolname.</param>
+    /// <param name="zcolname">Zcolname.</param>
+    /// <param name="sizename">Sizename.</param>
+    /// <param name="colorname">Colorname.</param>
+    /// <param name="data">Data.</param>
     public void LoadData(string xcolname, string ycolname, string zcolname, string sizename, string colorname, DataExtractor data)
     {
+
         dataPositions = new Vector3[data.dataLength];
-        float[] xvalues, yvalues, zvalues, sizevalues, colorvalues;
-        if (xcolname.Length > 0)
-        {
-            xvalues = new float[data.dataLength];
-        }
-        if (ycolname.Length > 0)
-        {
-            yvalues = new float[data.dataLength];
-        }
-        if (zcolname.Length > 0)
-        {
-            zvalues = new float[data.dataLength];
-        }
-        if (sizename.Length > 0)
-        {
-            sizevalues = new float[data.dataLength];
-        }
-        if (colorname.Length > 0)
-        {
-            colorvalues = new float[data.dataLength];
-        }
+
+        xvalues = new float[data.dataLength];
+        yvalues = new float[data.dataLength];
+        zvalues = new float[data.dataLength];
+        sizevalues = new float[data.dataLength];
+        colorvalues = new float[data.dataLength];
+
+        float[][] values = { xvalues, yvalues, zvalues, sizevalues, colorvalues};
 
 
-        float[][] threeAxies = { xvalues, yvalues, zvalues };
+        string[] colnames = { xcolname, ycolname, zcolname, sizename, colorname};
 
-
-        string[] colnames = { xcolname, ycolname, zcolname };
-
+        ///read data into x,y,z values;
         for (int i = 0; i < colnames.Length; i++)
         {
             string colname = colnames[i];
-            if (data.GetDataType(colname) == typeof(string))
+            ///jump to next if the value is empty string
+            if (colname.Length <= 0)
+            {
+                //List<float> datas = data.GetColumn(colname);
+                for (int j = 0; j < data.dataLength; j++)
+                {
+                    //values[i][j] = 1;
+                    values[i][j] = 0;
+                }
+            }
+            else if (data.GetDataType(colname) == typeof(string))
             {
                 List<string> strs = data.GetStrColumn(colname);
                 //TODO for axis setting the right string value to it
                 List<string> strValue = new List<string>();
-                ///list of string method indexof return the first value equal to the string
+                ///List<string>'s method 'indexof' return the first value equal to the string
                 /// so cannot use indexof to indentify which index it is.
                 for (int j = 0; j < strs.Count; j++)
                 {
@@ -68,7 +72,7 @@ public class DataVisualizorG : MonoBehaviour
                     {
                         strValue.Add(str);
                     }
-                    threeAxies[i][j] = strValue.IndexOf(str);
+                    values[i][j] = strValue.IndexOf(str);
                 }
 
             }
@@ -77,11 +81,13 @@ public class DataVisualizorG : MonoBehaviour
                 List<float> datas = data.GetColumn(colname);
                 for (int j = 0; j < datas.Count; j++)
                 {
-                    threeAxies[i][j] = 1;
-                    threeAxies[i][j] = datas[j];
+                    //values[i][j] = 1;
+                    values[i][j] = datas[j];
                 }
             }
         }
+
+
 
         for (int i = 0; i < data.dataLength; i++)
         {
@@ -95,7 +101,10 @@ public class DataVisualizorG : MonoBehaviour
         ParticleProcess();
     }
 
+    void ChangeDimensions()
+    {
 
+    }
 
     public void AdjustAxiesOffset(float x, float y, float z)
     {
@@ -124,9 +133,11 @@ public class DataVisualizorG : MonoBehaviour
         var pointsData = new PointData[dataPositions.Length];
         for (int i = 0; i < pointsData.Length; i++)
         {
-            var data = new PointData();
-            data.position = dataPositions[i];
-            data.size = 1;
+            var data = new PointData
+            {
+                position = dataPositions[i],
+                size = 1
+            };
             pointsData[i] = data;
         }
 
