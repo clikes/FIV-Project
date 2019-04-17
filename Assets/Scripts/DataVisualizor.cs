@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DataIO;
 using System;
+using Cinemachine;
 
 public class DataVisualizor : MonoBehaviour {
 
@@ -14,7 +15,7 @@ public class DataVisualizor : MonoBehaviour {
 
     public bool IsShowPoint = true;
 
-    
+    CinemachineTargetGroup TargetGroup;
 
     List<GameObject> dataobjects = new List<GameObject>();
 
@@ -96,6 +97,7 @@ public class DataVisualizor : MonoBehaviour {
         dataobjects.Clear();
         float maxSize = float.MinValue;
         float maxColor = float.MinValue;
+        CinemachineTargetGroup.Target[] targets = new CinemachineTargetGroup.Target[dataPositions.Length];
 
         foreach (var val in sizevalues)
         {
@@ -121,6 +123,8 @@ public class DataVisualizor : MonoBehaviour {
 
             dataobjects.Add(Instantiate(dataPoint, dataPositions[i], dataPoint.transform.rotation, Parent.transform));
 
+            targets[i] = new CinemachineTargetGroup.Target() { target = dataobjects[i].transform, weight = 1f, radius = 1f };
+
             if (colnames[4].Length == 0)
             {
                 dataobjects[i].GetComponent<Renderer>().material.color = Color.red;
@@ -136,6 +140,7 @@ public class DataVisualizor : MonoBehaviour {
                 dataobjects[i].transform.localScale = new Vector3(scale, scale, scale);
             }
         }
+        TargetGroup.m_Targets = targets;
 
     }
 
@@ -189,6 +194,7 @@ public class DataVisualizor : MonoBehaviour {
     void Start()
     {
         Parent = GameObject.Find("Points");
+        TargetGroup = GameObject.Find("TargetGroup1").GetComponent<CinemachineTargetGroup>();
         //DrawData();
         //for (int i = 0; i < 100000; i++)
         //{
