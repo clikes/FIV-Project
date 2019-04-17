@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using DataIO;
 using UnityEngine.UI;
+using Cinemachine;
 using static UnityEngine.UI.Dropdown;
 
 public class UIController : MonoBehaviour {
@@ -28,6 +29,8 @@ public class UIController : MonoBehaviour {
 
     string[] colnames = new string[5];
 
+
+
     string defaultOpt = "  -  ";
 
     void Start () {
@@ -36,6 +39,7 @@ public class UIController : MonoBehaviour {
         {
             dp.ClearOptions();
         }
+
     }
 
     /// <summary>
@@ -121,6 +125,9 @@ public class UIController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		
-	}
+        if (temp != null)
+        {
+            UpdateSelectPanel();
+        }
+    }
 }
