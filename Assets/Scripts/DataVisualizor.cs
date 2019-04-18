@@ -254,27 +254,6 @@ public class DataVisualizor : MonoBehaviour {
         Parent.SetActive(isvisable);
     }
 
-    void tester()
-    {
-        float x, y, z,r = 5;
-        float w = 100;
-        float h = 100;
-            
-           // for (r = 5; r > 0; r -= 0.2f)
-           // {
-                for (int i = 0; i <= 360; i++)
-                {
-                    float angle = Mathf.PI * i / 180;
-                    x = r * (2 * Mathf.Sin(angle) + Mathf.Sin(2 * angle));
-                    y = r * (2 * Mathf.Cos(angle) + Mathf.Cos(2 * angle));
-                    dataobjects.Add(Instantiate(dataPoint, new Vector3(x, y, 0), dataPoint.transform.rotation));
-
-                }
-            //}
-        
-       
-       
-    }
 
     void Start()
     {
