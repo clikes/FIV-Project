@@ -11,10 +11,27 @@ public class DataVisualizor : MonoBehaviour {
     public GameObject dataPoint;
     GameObject Parent;
 
+    /// <summary>
+    /// The offset of three axies
+    /// </summary>
+    public float Xoffset { get; private set; } = 0;
+    public float Yoffset { get; private set; } = 0;
+    public float Zoffset { get; private set; } = 0;
 
+    /// <summary>
+    /// The scale of three axies
+    /// </summary>
+    public float Xscale { get; private set; } = 1;
+    public float Yscale { get; private set; } = 1;
+    public float Zscale { get; private set; } = 1;
+
+    public float[] OffsetAndScale { get; private set; }
 
     public bool IsShowPoint = true;
 
+    /// <summary>
+    /// Cinemachine target group, for cinemachine follow whole data points
+    /// </summary>
     CinemachineTargetGroup TargetGroup;
 
     List<GameObject> dataobjects = new List<GameObject>();
@@ -49,14 +66,26 @@ public class DataVisualizor : MonoBehaviour {
         {
             string colname = colnames[i];
             ///jump to next if the value is empty string
-            if (colname.Length <= 0)
+            if (colname.Length == 0)
             {
                 //List<float> datas = data.GetColumn(colname);
-                for (int j = 0; j < data.dataLength; j++)
+                if (i != 3)
                 {
-                    //values[i][j] = 1;
-                    values[i][j] = 0;
+                    for (int j = 0; j < data.dataLength; j++)
+                    {
+                        //values[i][j] = 1;
+                        values[i][j] = 0;
+                    }
                 }
+                else
+                {
+                    for (int j = 0; j < data.dataLength; j++)
+                    {
+                        //values[i][j] = 1;
+                        values[i][j] = 1;
+                    }
+                }
+
             }
             else if (data.GetDataType(colname) == typeof(string))
             {
@@ -140,19 +169,75 @@ public class DataVisualizor : MonoBehaviour {
                 dataobjects[i].transform.localScale = new Vector3(scale, scale, scale);
             }
         }
+
+        AutoAdjustAxies();
+
         TargetGroup.m_Targets = targets;
 
     }
 
-    public void AdjustAxiesOffset(float x, float y, float z)
+
+    public void AutoAdjustAxies()
     {
 
+        float min = float.MaxValue;
+        float max = float.MinValue;
+        foreach (var item in xvalues)
+        {
+            if (item > max)
+            {
+                max = item;
+                }
+            if (item < min)
+            {
+                min = item;
+            }
+        }
+        Xoffset = (max + min) / 2;
+
+        min = float.MaxValue;
+        max = float.MinValue;
+        foreach (var item in yvalues)
+        {
+            if (item > max)
+            {
+                max = item;
+            }
+            if (item < min)
+            {
+                min = item;
+            }
+        }
+        Yoffset = (max + min) / 2;
+
+        min = float.MaxValue;
+        max = float.MinValue;
+        foreach (var item in zvalues)
+        {
+            if (item > max)
+            {
+                max = item;
+            }
+            if (item < min)
+            {
+                min = item;
+            }
+        }
+        Zoffset = (max + min) / 2;
+        AdjustAxiesOffsetAndScale();
+    }
+
+    public void AdjustAxiesOffsetAndScale()
+    { 
         for (int i = 0; i < dataPositions.Length; i++)
         {
-            dataPositions[i].x += x;
-            dataPositions[i].y += y;
-            dataPositions[i].z += z;
-            dataobjects[i].transform.position = dataPositions[i];
+            Vector3 buffer = dataPositions[i] - new Vector3(Xoffset, Yoffset, Zoffset);
+            buffer.x *= Xscale;
+            buffer.y *= Yscale;
+            buffer.z *= Zscale;
+
+            dataobjects[i].transform.position = buffer;
+            //dataobjects[i].transform.localScale = new Vector3(sizevalues[i] * Xscale, sizevalues[i] * Yscale, sizevalues[i] * Zscale);
         }
     }
 
@@ -195,6 +280,7 @@ public class DataVisualizor : MonoBehaviour {
     {
         Parent = GameObject.Find("Points");
         TargetGroup = GameObject.Find("TargetGroup1").GetComponent<CinemachineTargetGroup>();
+        OffsetAndScale = new float[6] { Xoffset, Yoffset, Zoffset, Xscale, Yscale, Zscale };
         //DrawData();
         //for (int i = 0; i < 100000; i++)
         //{

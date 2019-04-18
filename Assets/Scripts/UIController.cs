@@ -25,6 +25,10 @@ public class UIController : MonoBehaviour {
 
     public Text[] selectPanelTexts;
 
+    public Text[] OffsetAndScaleTexts;
+
+    public Slider[] OffsetAndScaleSliders;
+
     string xcolname, ycolname, zcolname, sizename, colorname;
 
     string[] colnames = new string[5];
@@ -122,7 +126,15 @@ public class UIController : MonoBehaviour {
         }
     }
 
-
+    public void OnOffsetAndSizeSliderChange()
+    {
+        for (int i = 0; i < OffsetAndScaleTexts.Length; i++)
+        {
+            dv.OffsetAndScale[i] = OffsetAndScaleSliders[i].value;
+            OffsetAndScaleTexts[i].text = dv.OffsetAndScale[i].ToString();
+        }
+        dv.AdjustAxiesOffsetAndScale();
+    }
     // Update is called once per frame
     void Update () {
         if (temp != null)
