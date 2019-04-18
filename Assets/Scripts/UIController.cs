@@ -29,6 +29,8 @@ public class UIController : MonoBehaviour {
 
     public Slider[] OffsetAndScaleSliders;
 
+    public GameObject slider;
+
     string xcolname, ycolname, zcolname, sizename, colorname;
 
     string[] colnames = new string[5];
@@ -60,6 +62,7 @@ public class UIController : MonoBehaviour {
         MainPanel.SetActive(false);
         UpdateSelectPanel();
         SelectPanel.SetActive(true);
+        
 
     }
 
@@ -89,6 +92,7 @@ public class UIController : MonoBehaviour {
         }
         dv.LoadData(colnames[0], colnames[1], colnames[2], colnames[3], colnames[4], temp);
         SelectPanel.SetActive(false);
+        slider.SetActive(true);
     }
 
     /// <summary>
@@ -132,6 +136,7 @@ public class UIController : MonoBehaviour {
         {
             dv.OffsetAndScale[i] = OffsetAndScaleSliders[i].value;
             OffsetAndScaleTexts[i].text = dv.OffsetAndScale[i].ToString();
+            Debug.Log(dv.OffsetAndScale[i]);
         }
         dv.AdjustAxiesOffsetAndScale();
     }

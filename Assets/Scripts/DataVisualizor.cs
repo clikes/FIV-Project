@@ -231,10 +231,10 @@ public class DataVisualizor : MonoBehaviour {
     { 
         for (int i = 0; i < dataPositions.Length; i++)
         {
-            Vector3 buffer = dataPositions[i] - new Vector3(Xoffset, Yoffset, Zoffset);
-            buffer.x *= Xscale;
-            buffer.y *= Yscale;
-            buffer.z *= Zscale;
+            Vector3 buffer = dataPositions[i] - new Vector3(OffsetAndScale[0], OffsetAndScale[1], OffsetAndScale[2]);
+            buffer.x *= OffsetAndScale[3];
+            buffer.y *= OffsetAndScale[4];
+            buffer.z *= OffsetAndScale[5];
 
             dataobjects[i].transform.position = buffer;
             //dataobjects[i].transform.localScale = new Vector3(sizevalues[i] * Xscale, sizevalues[i] * Yscale, sizevalues[i] * Zscale);
