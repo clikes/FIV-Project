@@ -193,7 +193,7 @@ public class DataVisualizor : MonoBehaviour {
                 min = item;
             }
         }
-        Xoffset = (max + min) / 2;
+        OffsetAndScale[0] = (max + min) / 2;
 
         min = float.MaxValue;
         max = float.MinValue;
@@ -208,7 +208,7 @@ public class DataVisualizor : MonoBehaviour {
                 min = item;
             }
         }
-        Yoffset = (max + min) / 2;
+        OffsetAndScale[1] = (max + min) / 2;
 
         min = float.MaxValue;
         max = float.MinValue;
@@ -223,7 +223,7 @@ public class DataVisualizor : MonoBehaviour {
                 min = item;
             }
         }
-        Zoffset = (max + min) / 2;
+        OffsetAndScale[2] = (max + min) / 2;
         AdjustAxiesOffsetAndScale();
     }
 

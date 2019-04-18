@@ -31,6 +31,8 @@ public class UIController : MonoBehaviour {
 
     public GameObject slider;
 
+    GameObject freecamera;
+
     string xcolname, ycolname, zcolname, sizename, colorname;
 
     string[] colnames = new string[5];
@@ -45,6 +47,8 @@ public class UIController : MonoBehaviour {
         {
             dp.ClearOptions();
         }
+
+        freecamera = GameObject.Find("CM FreeLook1");
 
     }
 
@@ -92,7 +96,16 @@ public class UIController : MonoBehaviour {
         }
         dv.LoadData(colnames[0], colnames[1], colnames[2], colnames[3], colnames[4], temp);
         SelectPanel.SetActive(false);
+
+        for (int i = 0; i < 6; i++)
+        {
+            OffsetAndScaleSliders[i].value = dv.OffsetAndScale[i];
+            OffsetAndScaleSliders[i].onValueChanged.RemoveAllListeners();
+            OffsetAndScaleSliders[i].onValueChanged.AddListener(delegate { OnOffsetAndSizeSliderChange(); });
+            OffsetAndScaleTexts[i].text = dv.OffsetAndScale[i].ToString();
+        }
         slider.SetActive(true);
+
     }
 
     /// <summary>
@@ -136,15 +149,23 @@ public class UIController : MonoBehaviour {
         {
             dv.OffsetAndScale[i] = OffsetAndScaleSliders[i].value;
             OffsetAndScaleTexts[i].text = dv.OffsetAndScale[i].ToString();
-            Debug.Log(dv.OffsetAndScale[i]);
+            //Debug.Log(dv.OffsetAndScale[i]);
         }
         dv.AdjustAxiesOffsetAndScale();
     }
+
+    bool cameraMove = true;
+
     // Update is called once per frame
     void Update () {
         if (temp != null)
         {
             UpdateSelectPanel();
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            cameraMove = !cameraMove;
+            freecamera.SetActive(cameraMove);
         }
     }
 }

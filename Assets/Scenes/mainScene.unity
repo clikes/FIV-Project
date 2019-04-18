@@ -1740,15 +1740,15 @@ MonoBehaviour:
   m_FillRect: {fileID: 792250679}
   m_HandleRect: {fileID: 308261839}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 100
+  m_MinValue: -1000
+  m_MaxValue: 1000
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 741307958}
-        m_MethodName: OnOffsetAndSizeSliderChange
+      - m_Target: {fileID: 0}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2045,15 +2045,15 @@ MonoBehaviour:
   m_FillRect: {fileID: 834610113}
   m_HandleRect: {fileID: 1083948499}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 100
+  m_MinValue: -1000
+  m_MaxValue: 1000
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 741307958}
-        m_MethodName: OnOffsetAndSizeSliderChange
+      - m_Target: {fileID: 0}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4021,15 +4021,15 @@ MonoBehaviour:
   m_FillRect: {fileID: 1472159873}
   m_HandleRect: {fileID: 1106451636}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 100
+  m_MinValue: -1000
+  m_MaxValue: 1000
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 741307958}
-        m_MethodName: OnOffsetAndSizeSliderChange
+      - m_Target: {fileID: 0}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4879,15 +4879,15 @@ MonoBehaviour:
   m_FillRect: {fileID: 1596557461}
   m_HandleRect: {fileID: 970633998}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 100
+  m_MinValue: -1000
+  m_MaxValue: 1000
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 741307958}
-        m_MethodName: OnOffsetAndSizeSliderChange
+      - m_Target: {fileID: 0}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6803,15 +6803,15 @@ MonoBehaviour:
   m_FillRect: {fileID: 1672970139}
   m_HandleRect: {fileID: 1609575740}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 100
+  m_MinValue: -1000
+  m_MaxValue: 1000
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 741307958}
-        m_MethodName: OnOffsetAndSizeSliderChange
+      - m_Target: {fileID: 0}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8166,15 +8166,15 @@ MonoBehaviour:
   m_FillRect: {fileID: 378535334}
   m_HandleRect: {fileID: 770867208}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 100
+  m_MinValue: -1000
+  m_MaxValue: 1000
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 741307958}
-        m_MethodName: OnOffsetAndSizeSliderChange
+      - m_Target: {fileID: 0}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
