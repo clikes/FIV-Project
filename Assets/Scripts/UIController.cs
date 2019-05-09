@@ -57,6 +57,8 @@ public class UIController : MonoBehaviour {
     /// </summary>
     public void ClickImportData()
     {
+
+        Debug.Log(UnityEngine.EventSystems.EventSystem.current);
         string filePath = EditorUtility.OpenFilePanel("Import File", "", "");
         if (filePath.Length == 0) return;
         FileReader.ReadFile(filePath);

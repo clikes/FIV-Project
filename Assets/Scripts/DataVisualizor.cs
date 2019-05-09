@@ -36,6 +36,18 @@ public class DataVisualizor : MonoBehaviour {
 
     List<GameObject> dataobjects = new List<GameObject>();
 
+    CinemachineTargetGroup.Target[] targets;
+
+    int drawindex;
+
+    int drawperframe = 100;
+
+    bool drawStart = false;
+
+    float maxSize = float.MinValue;
+     
+    float maxColor = float.MinValue;
+
     Vector3[] dataPositions;
 
     Color[] dataColor;
@@ -124,10 +136,9 @@ public class DataVisualizor : MonoBehaviour {
         dataPositions = new Vector3[dataPositions.Length];
         dataColor = new Color[dataPositions.Length];
         dataobjects.Clear();
-        float maxSize = float.MinValue;
-        float maxColor = float.MinValue;
-        CinemachineTargetGroup.Target[] targets = new CinemachineTargetGroup.Target[dataPositions.Length];
 
+
+        targets = new CinemachineTargetGroup.Target[dataPositions.Length];
         foreach (var val in sizevalues)
         {
             if (maxSize < val)
@@ -144,35 +155,74 @@ public class DataVisualizor : MonoBehaviour {
             }
         }
 
-        for (int i = 0; i < dataPositions.Length; i++)
+        //for (int i = 0; i < dataPositions.Length; i++)
+        //{
+        //    dataPositions[i] = new Vector3(xvalues[i], yvalues[i], zvalues[i]);
+
+
+
+        //    dataobjects.Add(Instantiate(dataPoint, dataPositions[i], dataPoint.transform.rotation, Parent.transform));
+
+        //    targets[i] = new CinemachineTargetGroup.Target() { target = dataobjects[i].transform, weight = 1f, radius = 1f };
+
+        //    if (colnames[4].Length == 0)
+        //    {
+        //        dataobjects[i].GetComponent<Renderer>().material.color = Color.red;
+        //    }
+        //    else
+        //    {
+        //        dataobjects[i].GetComponent<Renderer>().material.color = new Color(1 - colorvalues[i] / maxColor, 1 - colorvalues[i] / maxColor,  1 - colorvalues[i] / maxColor);
+        //    }
+
+        //    if (colnames[3].Length != 0)
+        //    {
+        //        float scale = sizevalues[i] / maxSize * sizeMaxScale;
+        //        dataobjects[i].transform.localScale = new Vector3(scale, scale, scale);
+        //    }
+        //}
+        drawStart = true;
+        //AutoAdjustAxies();
+
+        //TargetGroup.m_Targets = targets;
+
+    }
+
+    public void FrameDraw()
+    {
+        int targetsDraw = drawindex + drawperframe;
+        for ( ; drawindex < targetsDraw && drawindex < dataPositions.Length ; drawindex++)
         {
-            dataPositions[i] = new Vector3(xvalues[i], yvalues[i], zvalues[i]);
+            dataPositions[drawindex] = new Vector3(xvalues[drawindex], yvalues[drawindex], zvalues[drawindex]);
 
 
 
-            dataobjects.Add(Instantiate(dataPoint, dataPositions[i], dataPoint.transform.rotation, Parent.transform));
+            dataobjects.Add(Instantiate(dataPoint, dataPositions[drawindex], dataPoint.transform.rotation, Parent.transform));
 
-            targets[i] = new CinemachineTargetGroup.Target() { target = dataobjects[i].transform, weight = 1f, radius = 1f };
+            targets[drawindex] = new CinemachineTargetGroup.Target() { target = dataobjects[drawindex].transform, weight = 1f, radius = 1f };
 
             if (colnames[4].Length == 0)
             {
-                dataobjects[i].GetComponent<Renderer>().material.color = Color.red;
+                dataobjects[drawindex].GetComponent<Renderer>().material.color = Color.red;
             }
             else
             {
-                dataobjects[i].GetComponent<Renderer>().material.color = new Color(1 - colorvalues[i] / maxColor, 1 - colorvalues[i] / maxColor,  1 - colorvalues[i] / maxColor);
+                dataobjects[drawindex].GetComponent<Renderer>().material.color = new Color(1 - colorvalues[drawindex] / maxColor, 1 - colorvalues[drawindex] / maxColor, 1 - colorvalues[drawindex] / maxColor);
             }
 
             if (colnames[3].Length != 0)
             {
-                float scale = sizevalues[i] / maxSize * sizeMaxScale;
-                dataobjects[i].transform.localScale = new Vector3(scale, scale, scale);
+                float scale = sizevalues[drawindex] / maxSize * sizeMaxScale;
+                dataobjects[drawindex].transform.localScale = new Vector3(scale, scale, scale);
             }
         }
 
-        AutoAdjustAxies();
+        if (drawindex >= dataPositions.Length)
+        {
+            AutoAdjustAxies();
+            drawStart = false;
+            TargetGroup.m_Targets = targets;
+        }
 
-        TargetGroup.m_Targets = targets;
 
     }
 
@@ -254,6 +304,27 @@ public class DataVisualizor : MonoBehaviour {
         Parent.SetActive(isvisable);
     }
 
+    void tester()
+    {
+        float x, y, z,r = 5;
+        float w = 100;
+        float h = 100;
+            
+           // for (r = 5; r > 0; r -= 0.2f)
+           // {
+                for (int i = 0; i <= 360; i++)
+                {
+                    float angle = Mathf.PI * i / 180;
+                    x = r * (2 * Mathf.Sin(angle) + Mathf.Sin(2 * angle));
+                    y = r * (2 * Mathf.Cos(angle) + Mathf.Cos(2 * angle));
+                    dataobjects.Add(Instantiate(dataPoint, new Vector3(x, y, 0), dataPoint.transform.rotation));
+
+                }
+            //}
+        
+       
+       
+    }
 
     void Start()
     {
@@ -270,6 +341,9 @@ public class DataVisualizor : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-
+        if (drawStart)
+        {
+            FrameDraw();
+        }
     }
 }

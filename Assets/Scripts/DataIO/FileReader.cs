@@ -29,7 +29,8 @@ namespace DataIO
         {
             DataTable dt = new DataTable();
             FileStream fs = new FileStream(fileName, System.IO.FileMode.Open, System.IO.FileAccess.Read);
-            StreamReader sr = new StreamReader(fs, new System.Text.UnicodeEncoding());
+            Debug.Log(GetType(fileName));
+            StreamReader sr = new StreamReader(fs, GetType(fileName));
             ///Read file line by line
             string strLine = "";
             //the record of each line 
@@ -39,10 +40,13 @@ namespace DataIO
             //first line is the name of column
             bool IsFirst = true;
             bool IsFirstData = true;
-
+            int count = 0;
             //read csv line by line
             while ((strLine = sr.ReadLine()) != null)
             {
+                count++;
+                //Debug.Log(++count);
+                //Debug.Log(strLine);
                 aryLine = strLine.Split(',');
                 if (IsFirst == true)
                 {
@@ -88,7 +92,7 @@ namespace DataIO
                 }
             }
 
-
+            Debug.Log(count);
 
             //foreach (DataRow datarow in dt.Rows)
             //{
@@ -104,6 +108,54 @@ namespace DataIO
             sr.Close();
             fs.Close();
             return dt;
+        }
+
+        /// <summary>
+        /// Open source code from https://www.cnblogs.com/lovko/archive/2008/12/26/1363002.html
+        /// </summary>
+        /// <returns>The type.</returns>
+        /// <param name="FILE_NAME">File name.</param>
+        public static System.Text.Encoding GetType(string FILE_NAME)
+        {
+            FileStream fs = new FileStream(FILE_NAME, FileMode.Open, FileAccess.Read);
+            System.Text.Encoding r = GetType(fs);
+            fs.Close();
+            return r;
+        }
+
+        public static System.Text.Encoding GetType(FileStream fs)
+        {
+            /*byte[] Unicode=new byte[]{0xFF,0xFE};  
+            byte[] UnicodeBIG=new byte[]{0xFE,0xFF};  
+            byte[] UTF8=new byte[]{0xEF,0xBB,0xBF};*/
+
+            BinaryReader r = new BinaryReader(fs, System.Text.Encoding.Default);
+            byte[] ss = r.ReadBytes(3);
+            r.Close();
+            //编码类型 Coding=编码类型.ASCII;   
+            if (ss[0] >= 0xEF)
+            {
+                if (ss[0] == 0xEF && ss[1] == 0xBB && ss[2] == 0xBF)
+                {
+                    return System.Text.Encoding.UTF8;
+                }
+                else if (ss[0] == 0xFE && ss[1] == 0xFF)
+                {
+                    return System.Text.Encoding.BigEndianUnicode;
+                }
+                else if (ss[0] == 0xFF && ss[1] == 0xFE)
+                {
+                    return System.Text.Encoding.Unicode;
+                }
+                else
+                {
+                    return System.Text.Encoding.Default;
+                }
+            }
+            else
+            {
+                return System.Text.Encoding.Default;
+            }
         }
 
         //public static DataTable ChangeColumnType(DataTable oldtb, Type toType, string columnName)
@@ -134,17 +186,7 @@ namespace DataIO
 
         private void Start()
         {
-            List<string> strs = new List<string>();
-            List<string> strs2 = new List<string>();
-            string test1 = "2222";
-            string test2 = "2222";
-            string test3 = "2222";
-            string test4 = "2222";
-            strs.Add(test1);
-            strs.Add(test2);
-            strs.Add(test3);
-            strs.Add(test4);
-            strs2.Add(test1);
+          
             //Debug.Log(strs.IndexOf(test3));
         }
     }
