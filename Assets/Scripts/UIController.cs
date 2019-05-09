@@ -111,6 +111,10 @@ public class UIController : MonoBehaviour {
         axises.SetActive(true);
     }
 
+    public void OnClickReset()
+    {
+        dv.AutoAdjustAxies();
+    }
 
     public void OnClickExportData()
     {
@@ -183,7 +187,6 @@ public class UIController : MonoBehaviour {
         {
             UpdateSelectPanel();
         }
-        OffsetAndScaleSliders[0].value = 10;
         if (Input.GetKeyDown(KeyCode.Space))
         {
             cameraMove = !cameraMove;

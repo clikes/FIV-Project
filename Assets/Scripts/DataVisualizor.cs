@@ -229,11 +229,7 @@ public class DataVisualizor : MonoBehaviour {
         if (drawindex >= dataPositions.Length)
         {
             AutoAdjustAxies();
-            for (int i = 0; i < 6; i++)
-            {
-                uc.OffsetAndScaleSliders[i].value = OffsetAndScale[i];
-                uc.OffsetAndScaleTexts[i].text = OffsetAndScale[i].ToString();
-            }
+
             uc.sliderInit = true;
             drawStart = false;
             TargetGroup.m_Targets = targets;
@@ -290,11 +286,17 @@ public class DataVisualizor : MonoBehaviour {
             }
         }
         OffsetAndScale[2] = (max + min) / 2;
-        AdjustAxiesOffsetAndScale();
+        
         //foreach (var item in OffsetAndScale)
         //{
         //    Debug.Log(item);
         //}
+        for (int i = 0; i < 6; i++)
+        {
+            uc.OffsetAndScaleSliders[i].value = OffsetAndScale[i];
+            uc.OffsetAndScaleTexts[i].text = OffsetAndScale[i].ToString();
+        }
+        AdjustAxiesOffsetAndScale();
     }
 
     public void AdjustAxiesOffsetAndScale()
