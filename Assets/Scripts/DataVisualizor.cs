@@ -58,7 +58,7 @@ public class DataVisualizor : MonoBehaviour {
 
     float sizeMaxScale = 10;
 
-    float[] xvalues, yvalues, zvalues, sizevalues, colorvalues;
+    public float[] xvalues, yvalues, zvalues, sizevalues, colorvalues;
     string[] colnames;
 
     public void LoadData(string xcolname, string ycolname, string zcolname, string sizename, string colorname, DataExtractor data)

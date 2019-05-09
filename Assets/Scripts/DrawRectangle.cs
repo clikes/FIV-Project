@@ -159,6 +159,7 @@ public class DrawRectangle : MonoBehaviour
 
             }
         }
-
+        GameObject.Find("UIController").GetComponent<UIController>().UpdateSelectDataCount(indexes.Count);
+        GameObject.Find("UIController").GetComponent<UIController>().UpdateDataPromptsValue(indexes.ToArray());
     }
 }

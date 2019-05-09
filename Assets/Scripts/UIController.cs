@@ -27,9 +27,11 @@ public class UIController : MonoBehaviour {
 
     public GameObject MainPanel;
 
-    public TextMeshProUGUI[] selectPanelTexts;
+    public TextMeshProUGUI DataCount;
 
     public TextMeshProUGUI[] OffsetAndScaleTexts;
+
+    public TextMeshProUGUI[] DataPrompts;
 
     public Slider[] OffsetAndScaleSliders;
 
@@ -45,7 +47,7 @@ public class UIController : MonoBehaviour {
 
     string[] colnames = new string[5];
 
-
+    string[] colnamesOrigin = new string[5];
 
     string defaultOpt = "  -  ";
 
@@ -59,6 +61,34 @@ public class UIController : MonoBehaviour {
         freecamera = GameObject.Find("CM FreeLook1");
 
     }
+
+    public void UpdateSelectDataCount()
+    {
+        DataCount.text = "Data Count: \n" + dv.dataobjects.Count;
+    }
+
+    public void UpdateSelectDataCount(int SelectedDataCounts)
+    {
+        DataCount.text = "Data Count: \n" + SelectedDataCounts + " / " + dv.dataobjects.Count;
+    }
+
+    public void UpdateDataPromptsValue(int[] indexes)
+    {
+        float x = 0, y = 0, z = 0;
+        for (int i = 0; i < indexes.Length; i++)
+        {
+            x += dv.xvalues[indexes[i]];
+            y += dv.yvalues[indexes[i]];
+            z += dv.zvalues[indexes[i]];
+        }
+        x /= indexes.Length;
+        y /= indexes.Length;
+        z /= indexes.Length;
+        DataPrompts[0].text = colnamesOrigin[0] + " AVG: \n" + x;
+        DataPrompts[1].text = colnamesOrigin[1] + " AVG: \n" + y;
+        DataPrompts[2].text = colnamesOrigin[2] + " AVG: \n" + z;
+    }
+
 
     /// <summary>
     /// Clicks the import data button event.
@@ -94,6 +124,8 @@ public class UIController : MonoBehaviour {
         for (int i = 0; i < Selectdps.Length; i++)
         {
             Dropdown dp = Selectdps[i];
+            DataPrompts[i].text = dp.options[dp.value].text;
+            colnamesOrigin[i] = dp.options[dp.value].text;
             if (dp.options[dp.value].text == defaultOpt)
             {
                 colnames[i] = "";
