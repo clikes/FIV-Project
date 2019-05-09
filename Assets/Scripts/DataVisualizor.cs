@@ -70,6 +70,11 @@ public class DataVisualizor : MonoBehaviour {
         zvalues = new float[data.dataLength];
         sizevalues = new float[data.dataLength];
         colorvalues = new float[data.dataLength];
+        foreach (GameObject item in dataobjects)
+        {
+            GameObject.Destroy(item);
+        }
+        dataobjects.Clear();
 
         float[][] values = { xvalues, yvalues, zvalues, sizevalues, colorvalues };
 
