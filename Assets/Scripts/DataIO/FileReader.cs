@@ -59,6 +59,7 @@ namespace DataIO
                         //dc.DataType = typeof(double);
                         dt.Columns.Add(dc);
                         dt.Columns[0].DataType = typeof(int);
+                        
                     }
                 }
                 else
@@ -91,8 +92,9 @@ namespace DataIO
                     dt.Rows.Add(dr);
                 }
             }
-
-            Debug.Log(count);
+            //Debug.Log(dt.Rows[0].);
+            Debug.Log(dt.Rows[1][0]);
+            //Debug.Log(count);
 
             //foreach (DataRow datarow in dt.Rows)
             //{

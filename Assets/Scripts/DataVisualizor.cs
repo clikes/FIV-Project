@@ -34,7 +34,7 @@ public class DataVisualizor : MonoBehaviour {
     /// </summary>
     CinemachineTargetGroup TargetGroup;
 
-    List<GameObject> dataobjects = new List<GameObject>();
+    public List<GameObject> dataobjects = new List<GameObject>();
 
     CinemachineTargetGroup.Target[] targets;
 
@@ -180,6 +180,12 @@ public class DataVisualizor : MonoBehaviour {
         //        dataobjects[i].transform.localScale = new Vector3(scale, scale, scale);
         //    }
         //}
+        //List<Material> originMaterials = GameObject.Find("Main Camera").GetComponent<DrawRectangle>().OriginMats;
+        //foreach (var item in dataobjects)
+        //{
+        //    originMaterials.Add(item.GetComponent<Renderer>().material);
+        //}
+        
         drawStart = true;
         //AutoAdjustAxies();
 

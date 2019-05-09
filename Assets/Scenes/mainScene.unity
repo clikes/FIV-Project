@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44659412, g: 0.4964282, b: 0.5748238, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641412, b: 0.5748181, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 23224677}
   - component: {fileID: 23224681}
   - component: {fileID: 23224682}
+  - component: {fileID: 23224683}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -287,6 +288,24 @@ Skybox:
   m_GameObject: {fileID: 23224676}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 2100000, guid: 798128fb7e3249f46a986a32212017dc, type: 2}
+--- !u!114 &23224683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23224676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a085c347f92db940b6553d7435cee38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rectColor: {r: 0, g: 1, b: 0, a: 1}
+  rectMat: {fileID: 2100000, guid: 895e5bf01883a1f4eb731c9d46da125e, type: 2}
+  origin: {fileID: 0}
+  Selected: {fileID: 4800000, guid: 6a331076157e5644696482a0b3b7615c, type: 3}
+  indexes: 
+  OriginMats: []
 --- !u!1 &25216900
 GameObject:
   m_ObjectHideFlags: 0
@@ -3861,7 +3880,7 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
@@ -5092,26 +5111,26 @@ MonoBehaviour:
   SelectPanel: {fileID: 8261689434723217195}
   MainPanel: {fileID: 1200598167}
   selectPanelTexts:
-  - {fileID: 0}
+  - {fileID: 1346784912}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   OffsetAndScaleTexts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1346784912}
+  - {fileID: 2105500306}
+  - {fileID: 613847941}
+  - {fileID: 2116020625}
+  - {fileID: 965933676}
+  - {fileID: 2131173099}
   OffsetAndScaleSliders:
   - {fileID: 221876560}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2014182140}
+  - {fileID: 1623680228}
+  - {fileID: 789855340}
+  - {fileID: 685408759}
+  - {fileID: 2121284489}
   slider: {fileID: 159733019}
 --- !u!4 &741307959
 Transform:
@@ -6719,6 +6738,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataPoint: {fileID: 1778568892966724, guid: d30c20071080b4b65b395ae407b3c1ec, type: 3}
   IsShowPoint: 1
+  dataobjects: []
 --- !u!4 &1001655768
 Transform:
   m_ObjectHideFlags: 0

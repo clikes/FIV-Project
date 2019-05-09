@@ -7,6 +7,7 @@ using DataIO;
 using UnityEngine.UI;
 using Cinemachine;
 using static UnityEngine.UI.Dropdown;
+using TMPro;
 
 public class UIController : MonoBehaviour {
 
@@ -23,9 +24,9 @@ public class UIController : MonoBehaviour {
 
     public GameObject MainPanel;
 
-    public Text[] selectPanelTexts;
+    public TextMeshProUGUI[] selectPanelTexts;
 
-    public Text[] OffsetAndScaleTexts;
+    public TextMeshProUGUI[] OffsetAndScaleTexts;
 
     public Slider[] OffsetAndScaleSliders;
 
@@ -57,8 +58,6 @@ public class UIController : MonoBehaviour {
     /// </summary>
     public void ClickImportData()
     {
-
-        Debug.Log(UnityEngine.EventSystems.EventSystem.current);
         string filePath = EditorUtility.OpenFilePanel("Import File", "", "");
         if (filePath.Length == 0) return;
         FileReader.ReadFile(filePath);
