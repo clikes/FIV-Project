@@ -111,9 +111,20 @@ public class UIController : MonoBehaviour {
         axises.SetActive(true);
     }
 
+    public void OnClickMainMenu()
+    {
+        MainPanel.SetActive(!MainPanel.activeSelf);
+    }
+
     public void OnClickReset()
     {
+        sliderInit = false;
+        for (int i = 0; i < 6; i++)
+        {
+            dv.OffsetAndScale[i] = 1;
+        }
         dv.AutoAdjustAxies();
+        sliderInit = true; ;
     }
 
     public void OnClickExportData()
@@ -174,7 +185,7 @@ public class UIController : MonoBehaviour {
         {
             dv.OffsetAndScale[i] = OffsetAndScaleSliders[i].value;
             OffsetAndScaleTexts[i].text = dv.OffsetAndScale[i].ToString();
-            //Debug.Log(dv.OffsetAndScale[i]);
+           
         }
         dv.AdjustAxiesOffsetAndScale();
     }
