@@ -20,8 +20,8 @@ public class DrawRectangle : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        rectMat.hideFlags = HideFlags.HideAndDontSave;
-        rectMat.shader.hideFlags = HideFlags.HideAndDontSave;
+        //rectMat.hideFlags = HideFlags.HideAndDontSave;
+        //rectMat.shader.hideFlags = HideFlags.HideAndDontSave;
         indexes = new List<int>();
         dv = GameObject.Find("DataVisualizor").GetComponent<DataVisualizor>();
         GameObject[] goes = GameObject.FindGameObjectsWithTag("Player");

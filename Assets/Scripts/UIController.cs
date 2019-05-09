@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using Cinemachine;
 using static UnityEngine.UI.Dropdown;
 using TMPro;
+using SFB;
 
 public class UIController : MonoBehaviour {
 
@@ -64,10 +65,10 @@ public class UIController : MonoBehaviour {
     /// </summary>
     public void ClickImportData()
     {
-        string filePath = EditorUtility.OpenFilePanel("Import File", "", "");
-        if (filePath.Length == 0) return;
+        string[] filePath = StandaloneFileBrowser.OpenFilePanel("Import File", "", "", false);
+        if (filePath[0].Length == 0) return;
         sliderInit = false;
-        FileReader.ReadFile(filePath);
+        FileReader.ReadFile(filePath[0]);
         temp = FileReader.Datas[FileReader.Datas.Count-1];
         UpdateSelectPanel();
         //GameObject.Find("DataVisualizor").GetComponent<DataVisualizor>().LoadData("thalach", "chol", "trestbps", "age", "cp",  temp);
@@ -133,7 +134,7 @@ public class UIController : MonoBehaviour {
         {
             return;
         }
-        string filePath = EditorUtility.SaveFilePanel("Export File", "", "datas", "csv");
+        string filePath = StandaloneFileBrowser.SaveFilePanel("Export File", "", "datas", "csv");
         DataExporter.ExportData(dr.indexes.ToArray(), dv, filePath);
     }
 
