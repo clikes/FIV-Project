@@ -29,7 +29,7 @@ namespace DataIO
         {
             DataTable dt = new DataTable();
             FileStream fs = new FileStream(fileName, System.IO.FileMode.Open, System.IO.FileAccess.Read);
-            Debug.Log(GetType(fileName));
+            //Debug.Log(GetType(fileName));
             StreamReader sr = new StreamReader(fs, GetType(fileName));
             ///Read file line by line
             string strLine = "";
@@ -93,7 +93,7 @@ namespace DataIO
                 }
             }
             //Debug.Log(dt.Rows[0].);
-            Debug.Log(dt.Rows[1][0]);
+            //Debug.Log(dt.Rows[0][0]);
             //Debug.Log(count);
 
             //foreach (DataRow datarow in dt.Rows)

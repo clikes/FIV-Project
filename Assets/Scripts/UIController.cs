@@ -20,6 +20,8 @@ public class UIController : MonoBehaviour {
 
     public DataVisualizor dv;
 
+    public DrawRectangle dr;
+
     public GameObject SelectPanel;
 
     public GameObject MainPanel;
@@ -30,7 +32,11 @@ public class UIController : MonoBehaviour {
 
     public Slider[] OffsetAndScaleSliders;
 
+    public GameObject axises;
+
     public GameObject slider;
+
+    public bool sliderInit = false;
 
     GameObject freecamera;
 
@@ -60,6 +66,7 @@ public class UIController : MonoBehaviour {
     {
         string filePath = EditorUtility.OpenFilePanel("Import File", "", "");
         if (filePath.Length == 0) return;
+        sliderInit = false;
         FileReader.ReadFile(filePath);
         temp = FileReader.Datas[FileReader.Datas.Count-1];
         UpdateSelectPanel();
@@ -98,15 +105,21 @@ public class UIController : MonoBehaviour {
         dv.LoadData(colnames[0], colnames[1], colnames[2], colnames[3], colnames[4], temp);
         SelectPanel.SetActive(false);
 
-        for (int i = 0; i < 6; i++)
-        {
-            OffsetAndScaleSliders[i].value = dv.OffsetAndScale[i];
-            OffsetAndScaleSliders[i].onValueChanged.RemoveAllListeners();
-            OffsetAndScaleSliders[i].onValueChanged.AddListener(delegate { OnOffsetAndSizeSliderChange(); });
-            OffsetAndScaleTexts[i].text = dv.OffsetAndScale[i].ToString();
-        }
-        slider.SetActive(true);
 
+        //sliderInit = true;
+        slider.SetActive(true);
+        axises.SetActive(true);
+    }
+
+
+    public void OnClickExportData()
+    {
+        if (dr.indexes.Count == 0)
+        {
+            return;
+        }
+        string filePath = EditorUtility.SaveFilePanel("Export File", "", "datas", "csv");
+        DataExporter.ExportData(dr.indexes.ToArray(), dv, filePath);
     }
 
     /// <summary>
@@ -146,6 +159,13 @@ public class UIController : MonoBehaviour {
 
     public void OnOffsetAndSizeSliderChange()
     {
+        Debug.Log("!");
+        if (!sliderInit)
+        {
+            
+            return;
+        }
+        Debug.Log("!!");
         for (int i = 0; i < OffsetAndScaleTexts.Length; i++)
         {
             dv.OffsetAndScale[i] = OffsetAndScaleSliders[i].value;
@@ -163,9 +183,11 @@ public class UIController : MonoBehaviour {
         {
             UpdateSelectPanel();
         }
+        OffsetAndScaleSliders[0].value = 10;
         if (Input.GetKeyDown(KeyCode.Space))
         {
             cameraMove = !cameraMove;
+            dr.freezeData = !dr.freezeData;
             freecamera.SetActive(cameraMove);
         }
     }

@@ -11,7 +11,7 @@ namespace DataIO
 
         public List<Type> types;
 
-        private DataTable dataTable;
+        public DataTable dataTable;
 
         public int dataLength { get; private set; }
         public int columnLength { get; private set; }

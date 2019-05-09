@@ -52,6 +52,10 @@ public class DataVisualizor : MonoBehaviour {
 
     Color[] dataColor;
 
+    public DataExtractor de;
+
+    public UIController uc;
+
     float sizeMaxScale = 10;
 
     float[] xvalues, yvalues, zvalues, sizevalues, colorvalues;
@@ -60,7 +64,7 @@ public class DataVisualizor : MonoBehaviour {
     public void LoadData(string xcolname, string ycolname, string zcolname, string sizename, string colorname, DataExtractor data)
     {
         dataPositions = new Vector3[data.dataLength];
-
+        de = data;
         xvalues = new float[data.dataLength];
         yvalues = new float[data.dataLength];
         zvalues = new float[data.dataLength];
@@ -120,7 +124,7 @@ public class DataVisualizor : MonoBehaviour {
             else
             {
                 List<float> datas = data.GetColumn(colname);
-                Debug.Log(colname);
+                //Debug.Log(colname);
                 for (int j = 0; j < datas.Count; j++)
                 {
                     //values[i][j] = 1;
@@ -225,6 +229,12 @@ public class DataVisualizor : MonoBehaviour {
         if (drawindex >= dataPositions.Length)
         {
             AutoAdjustAxies();
+            for (int i = 0; i < 6; i++)
+            {
+                uc.OffsetAndScaleSliders[i].value = OffsetAndScale[i];
+                uc.OffsetAndScaleTexts[i].text = OffsetAndScale[i].ToString();
+            }
+            uc.sliderInit = true;
             drawStart = false;
             TargetGroup.m_Targets = targets;
         }
@@ -281,6 +291,10 @@ public class DataVisualizor : MonoBehaviour {
         }
         OffsetAndScale[2] = (max + min) / 2;
         AdjustAxiesOffsetAndScale();
+        //foreach (var item in OffsetAndScale)
+        //{
+        //    Debug.Log(item);
+        //}
     }
 
     public void AdjustAxiesOffsetAndScale()
@@ -337,6 +351,7 @@ public class DataVisualizor : MonoBehaviour {
         Parent = GameObject.Find("Points");
         TargetGroup = GameObject.Find("TargetGroup1").GetComponent<CinemachineTargetGroup>();
         OffsetAndScale = new float[6] { Xoffset, Yoffset, Zoffset, Xscale, Yscale, Zscale };
+        uc = GameObject.Find("UIController").GetComponent<UIController>();
         //DrawData();
         //for (int i = 0; i < 100000; i++)
         //{

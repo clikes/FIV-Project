@@ -15,6 +15,8 @@ public class DrawRectangle : MonoBehaviour
     public List<int> indexes;
     private List<GameObject> characters = new List<GameObject>();
     public List<Material> OriginMats = new List<Material>();
+
+    public bool freezeData = false;
     // Use this for initialization
     void Start()
     {
@@ -29,6 +31,10 @@ public class DrawRectangle : MonoBehaviour
 
     void Update()
     {
+        if (dv.dataobjects.Count == 0 || !freezeData)
+        {
+            return;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             drawRectangle = true;//如果鼠标左键按下 设置开始画线标志
@@ -44,6 +50,10 @@ public class DrawRectangle : MonoBehaviour
 
     void OnPostRender()
     {
+        if (!freezeData)
+        {
+            return;
+        }
         //画线这种操作推荐在OnPostRender()里进行 而不是直接放在Update，所以需要标志来开启
         if (drawRectangle)
         {

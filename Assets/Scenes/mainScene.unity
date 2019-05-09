@@ -306,6 +306,7 @@ MonoBehaviour:
   Selected: {fileID: 4800000, guid: 6a331076157e5644696482a0b3b7615c, type: 3}
   indexes: 
   OriginMats: []
+  freezeData: 0
 --- !u!1 &25216900
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,7 +443,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1024, y: 768}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -2095,8 +2096,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 741307958}
+        m_MethodName: OnOffsetAndSizeSliderChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2583,7 +2584,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1167399353}
     m_Modifications:
     - target: {fileID: 100000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_Name
@@ -2603,11 +2604,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalRotation.z
@@ -2619,7 +2620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2635,11 +2636,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 70
+      value: 70.00003
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 70
+      value: 70.00003
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalScale.z
@@ -3803,7 +3804,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Button
+  m_text: Export Data
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 125cb55b44b24c4393181402bc6200e6, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: f2dcf029949142e28b974630369c8b4e, type: 2}
@@ -3880,11 +3881,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -4171,6 +4172,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!4 &541126551 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1312150462}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &567993178
 GameObject:
   m_ObjectHideFlags: 0
@@ -4761,8 +4768,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 741307958}
+        m_MethodName: OnOffsetAndSizeSliderChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5108,6 +5115,7 @@ MonoBehaviour:
   - {fileID: 6412596661677983340}
   - {fileID: 2126007162}
   dv: {fileID: 0}
+  dr: {fileID: 23224683}
   SelectPanel: {fileID: 8261689434723217195}
   MainPanel: {fileID: 1200598167}
   selectPanelTexts:
@@ -5131,7 +5139,9 @@ MonoBehaviour:
   - {fileID: 789855340}
   - {fileID: 685408759}
   - {fileID: 2121284489}
+  axises: {fileID: 1167399352}
   slider: {fileID: 159733019}
+  sliderInit: 0
 --- !u!4 &741307959
 Transform:
   m_ObjectHideFlags: 0
@@ -5462,6 +5472,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 765317879}
   m_CullTransparentMesh: 0
+--- !u!4 &779940976 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 349794154}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &788805805
 GameObject:
   m_ObjectHideFlags: 0
@@ -5673,8 +5689,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 741307958}
+        m_MethodName: OnOffsetAndSizeSliderChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6061,7 +6077,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1167399353}
     m_Modifications:
     - target: {fileID: 100000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_Name
@@ -6085,11 +6101,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6097,7 +6113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6117,11 +6133,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 70
+      value: 70.00003
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 70
+      value: 70.00003
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
@@ -6739,6 +6755,7 @@ MonoBehaviour:
   dataPoint: {fileID: 1778568892966724, guid: d30c20071080b4b65b395ae407b3c1ec, type: 3}
   IsShowPoint: 1
   dataobjects: []
+  uc: {fileID: 0}
 --- !u!4 &1001655768
 Transform:
   m_ObjectHideFlags: 0
@@ -8104,6 +8121,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!4 &1135311956 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e,
+    type: 3}
+  m_PrefabInstance: {fileID: 876347062}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1143981332
 GameObject:
   m_ObjectHideFlags: 0
@@ -8213,6 +8236,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1143981332}
   m_CullTransparentMesh: 0
+--- !u!1 &1167399352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1167399353}
+  m_Layer: 0
+  m_Name: Axises
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1167399353
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167399352}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 779940976}
+  - {fileID: 1135311956}
+  - {fileID: 541126551}
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1200598167 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1043974309812553188, guid: cd685076726144e0786b8b1ba11c973a,
@@ -9000,7 +9056,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1167399353}
     m_Modifications:
     - target: {fileID: 100000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_Name
@@ -9020,7 +9076,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalRotation.y
@@ -9028,7 +9084,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9036,7 +9092,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9052,7 +9108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 70
+      value: 70.00003
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalScale.y
@@ -9060,7 +9116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 70
+      value: 70.00003
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b87b996291e47ad40a4a4c074f772d6e, type: 3}
@@ -10255,7 +10311,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1488946449}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 741307958}
+        m_MethodName: OnClickExportData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1488946449
@@ -11492,8 +11559,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 741307958}
+        m_MethodName: OnOffsetAndSizeSliderChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13809,8 +13876,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 741307958}
+        m_MethodName: OnOffsetAndSizeSliderChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14648,8 +14715,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 741307958}
+        m_MethodName: OnOffsetAndSizeSliderChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
